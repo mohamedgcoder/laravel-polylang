@@ -1,25 +1,25 @@
 {
-  "name": "mohamed-ahmed/laravel-polylang",
-  "description": "Flexible polymorphic translation package for Laravel 11+",
-  "type": "library",
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Mohamed Ahmed",
-      "email": "mohamedgcoder@gmail.com"
-    }
-  ],
-  "version": "1.0.0",
-  "autoload": {
-    "psr-4": {
-      "MohamedAhmed\\LaravelPolyLang\\": "src/"
-    }
-  },
-  "require": {
-    "php": "^8.2",
-    "illuminate/support": "^10.0 || ^11.0 || ^12.0"
-  },
-  "extra": {
+    "name": "mohamed-ahmed/laravel-polylang",
+    "description": "Flexible polymorphic translation package for Laravel 11+",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mohamed Ahmed",
+            "email": "mohamedgcoder@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "MohamedAhmed\\LaravelPolyLang\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^8.2",
+        "illuminate/support": "^10.0 || ^11.0 || ^12.0"
+    },
+    "version": "1.0.1",
+    "extra": {
     "laravel": {
       "providers": [
         "MohamedAhmed\\LaravelPolyLang\\LaravelPolyLangServiceProvider"
