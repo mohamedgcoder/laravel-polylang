@@ -1,0 +1,27 @@
+✅ A. Place your package in the project:
+
+packages/MohamedAhmed/LaravelPolyLang/
+
+✅ B. Add to root composer.json:
+
+"repositories": [
+  {
+    "type": "path",
+    "url": "packages/MohamedAhmed/LaravelPolyLang"
+  }
+]
+
+
+
+⚙️ 3. Publish & Migrate
+
+Publish the files:
+
+php artisan vendor:publish --tag=config
+php artisan vendor:publish --tag=migrations
+php artisan migrate
+
+
+Then install:
+
+composer require MohamedAhmed/laravel-polylang

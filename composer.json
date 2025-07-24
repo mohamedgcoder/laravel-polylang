@@ -1,0 +1,24 @@
+{
+  "name": "mohamed-ahmed/laravel-polylang",
+  "description": "Flexible polymorphic translation package for Laravel 11+",
+  "type": "library",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "MohamedAhmed\\LaravelPolyLang\\": "src/"
+    }
+  },
+  "require": {
+    "php": "^8.2",
+    "illuminate/support": "^11.0"
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "MohamedAhmed\\LaravelPolyLang\\LaravelPolyLangServiceProvider"
+      ]
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}

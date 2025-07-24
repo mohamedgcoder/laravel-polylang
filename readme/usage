@@ -1,0 +1,119 @@
+✅ 1. Example Model: Item.php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use MohamedAhmed\LaravelPolyLang\Traits\Translatable;
+
+class Item extends Model
+{
+    use Translatable;
+
+    protected $fillable = [
+        'slug',
+        'price',
+    ];
+
+    // Translatable fields: name, description
+}
+
+
+
+✅ 2. Example Controller: ItemController.php
+
+namespace App\Http\Controllers;
+
+use App\Models\Item;
+use Illuminate\Http\Request;
+
+class ItemController extends Controller
+{
+    // 🌐 Create a new item with translations
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'slug' => 'required|string|unique:items',
+            'price' => 'required|numeric',
+            'translations' => 'required|array',
+            'translations.*.name' => 'required|string',
+            'translations.*.description' => 'required|string',
+        ]);
+
+        // Create base item
+        $item = Item::create([
+            'slug' => $validated['slug'],
+            'price' => $validated['price'],
+        ]);
+
+        // Store translations
+        foreach ($validated['translations'] as $locale => $fields) {
+            foreach ($fields as $field => $value) {
+                $item->setTranslation($field, $value, $locale);
+            }
+        }
+
+        return response()->json(['success' => true, 'id' => $item->id], 201);
+    }
+
+    // 🌐 Fetch a translated item by Accept-Language header
+    public function show(Request $request, $id)
+    {
+        $item = Item::with('translations')->findOrFail($id);
+        $locale = app()->getLocale(); // set by SetLocale middleware
+
+        return response()->json([
+            'id' => $item->id,
+            'slug' => $item->slug,
+            'price' => $item->price,
+            'translations' => $item->getTranslatedAttributes(['name', 'description'], $locale),
+        ]);
+    }
+}
+
+
+
+🌐 create 
+{
+  "slug": "laptop-pro",
+  "price": 1899.99,
+  "translations": {
+    "en": {
+      "name": "Laptop Pro",
+      "description": "High-end performance laptop."
+    },
+    "ar": {
+      "name": "حاسوب برو",
+      "description": "حاسوب محمول عالي الأداء."
+    }
+  }
+}
+
+
+✅ 4. API Routes (Laravel 11 routes/api.php)
+
+use App\Http\Controllers\ItemController;
+use MohamedAhmed\LaravelPolyLang\Middleware\SetLocale;
+
+Route::middleware([SetLocale::class])->group(function () {
+    Route::post('/items', [ItemController::class, 'store']);
+    Route::get('/items/{id}', [ItemController::class, 'show']);
+});
+
+
+✅ 5. Request with Language
+
+GET /api/items/1
+Accept-Language: ar
+
+Returns:
+
+{
+  "id": 1,
+  "slug": "laptop-pro",
+  "price": 1899.99,
+  "translations": {
+    "name": "حاسوب برو",
+    "description": "حاسوب محمول عالي الأداء."
+  }
+}
+If Arabic is missing, it falls back to English (config('app.locale')).

@@ -1,0 +1,14 @@
+📌 Optional: Register Middleware (Laravel 11)
+
+If you're using Laravel 11's minimal bootstrap/app.php, add the middleware like this:
+✅ bootstrap/app.php:
+
+$app->middleware([
+    \MohamedAhmed\LaravelPolyLang\Middleware\SetLocale::class,
+]);
+
+Or use route-level middleware in routes/web.php or routes/api.php:
+
+Route::middleware(\MohamedAhmed\LaravelPolyLang\Middleware\SetLocale::class)->group(function () {
+    Route::get('/items/{id}', [ItemController::class, 'show']);
+});
