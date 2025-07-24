@@ -2,6 +2,7 @@
 
 namespace MohamedAhmed\LaravelPolyLang;
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class LaravelPolyLangServiceProvider extends ServiceProvider
@@ -21,15 +22,16 @@ class LaravelPolyLangServiceProvider extends ServiceProvider
                 __DIR__.'/../database/migrations/create_translations_table.php' =>
                     database_path("migrations/{$timestamp}_create_translations_table.php"),
             ], 'migrations');
+
+            if (!Schema::hasTable('translations')) {
+                $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+            }
         }
 
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
     }
 
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/config/polylang.php', 'polylang');
-
         $this->mergeConfigFrom(__DIR__.'/config/polylang.php', 'polylang');
 
         if ($this->app->runningInConsole()) {
