@@ -72,7 +72,7 @@ class ItemController extends Controller
 
 
 
-🌐 create 
+🌐 create
 {
   "slug": "laptop-pro",
   "price": 1899.99,
