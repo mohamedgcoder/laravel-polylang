@@ -18,7 +18,7 @@
         "php": "^8.2",
         "illuminate/support": "^10.0 || ^11.0 || ^12.0"
     },
-    "version": "2.0.0",
+    "version": "2.0.1",
     "extra": {
     "laravel": {
       "providers": [
