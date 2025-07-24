@@ -3,6 +3,12 @@
   "description": "Flexible polymorphic translation package for Laravel 11+",
   "type": "library",
   "license": "MIT",
+  "authors": [
+    {
+      "name": "Mohamed Ahmed",
+      "email": "mohamedgcoder@gmail.com"
+    }
+  ],
   "autoload": {
     "psr-4": {
       "MohamedAhmed\\LaravelPolyLang\\": "src/"
@@ -18,7 +24,5 @@
         "MohamedAhmed\\LaravelPolyLang\\LaravelPolyLangServiceProvider"
       ]
     }
-  },
-  "minimum-stability": "dev",
-  "prefer-stable": true
+  }
 }
